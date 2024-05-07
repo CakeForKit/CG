@@ -5,10 +5,10 @@ from PyQt5.QtGui import QColor, QPixmap
 from info import InfoWidget
 from canvas import Canvas
 from algos import (canonic_eq, param_eq, brezenhem, alg_midpoint, lib)
-from figure import FigureCircle, FigureCircleSpec, FigureEllipse, FigureEllipseSpec, ERRS_FIGURE
+from figure import FigureCircle, FigureCircleSpec, FigureEllipse, FigureEllipseSpec
 from Point import Point
-from errs import Errors_my
-# from time_graph import TimeGraphWidget
+from errs import Errors_my, BaseErr
+from graph_time_measure import *
 
 # from main_window import Ui_MainWindow
 
@@ -30,6 +30,9 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         uic.loadUi('main_window.ui', self)
         width, height = 2800, 1100
         self.setGeometry(50, 50, width, height)
+
+        self.data_graph_circle = time_comparison(circle=True)
+        self.data_graph_ellipse = time_comparison(circle=False)
 
         background_color = COLORS['white']
         self.line_color = COLORS['black']
@@ -92,11 +95,14 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
             count = 0
         print(f'draw_spec_circle:')
 
-        fig = FigureCircleSpec(algos, self.line_color, center, begr, endr, step, count)
-        if fig.err != 0:
-            err = Errors_my(ERRS_FIGURE[fig.err])
+
+        try:
+            fig = FigureCircleSpec(algos, self.line_color, center, begr, endr, step, count)
+        except BaseErr as ex:
+            err = Errors_my(ex.text())
             err.show()
             return
+
         self.canvas.add_figure(fig)
         self.update()
 
@@ -121,7 +127,7 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         beg_rx = self.beg_rx_ellipse_dsp.value()
         beg_ry = self.beg_ry_ellipse_dsp.value()
         step_rx = self.step_rx_ellipse_dsp.value()
-        step_ry = self.step_ry_ellipse_dsp.value()
+        step_ry = step_rx * beg_ry / beg_rx
         count = self.count_ellipse_sp.value()
         print(f'draw_spec_ellipse: ')
 
@@ -157,7 +163,6 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         dsp.setReadOnly(True)
         dsp.setStyleSheet("background-color: rgb(191, 191, 191);\n")
 
-
     def choose_algos(self):
         if self.canon_eq_rb.isChecked():
             print('canon_eq_rb')
@@ -167,7 +172,7 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
             algos = param_eq
         elif self.brez_rb.isChecked():
             print('brez_rb')
-            algos = breakpoint
+            algos = brezenhem
         elif self.mid_point_rb.isChecked():
             print('mid_point_rb')
             algos = alg_midpoint
@@ -233,11 +238,13 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
 
     def cmp_time_circle(self):
         print('cmp_time_circle')
-        # self.time_graph = TimeGraphWidget(self.canvas_lbl)
-        # self.time_graph.show()
+        # time_comparison(circle=True)
+        circle_graph_show(*self.data_graph_circle)
 
     def cmp_time_ellipse(self):
         print('cmp_time_ellipse')
+        # time_comparison(circle=False)
+        ellipse_graph_show(*self.data_graph_ellipse)
 
     def clear_canvas(self):
         print('clear_canvas')

@@ -11,10 +11,42 @@ def rotate(p, angle_rad, center):
     return Point(new_x, new_y)
 
 
+def get_symmetric_1_8(point, center):
+    xc, yc = center.get_xy()
+    res = [point]
+    res += [Point(i.y - yc + xc, i.x - xc + yc) for i in res]
+    res += [Point(-i.x + 2 * xc, i.y) for i in res]
+    res += [Point(i.x, -i.y + 2 * yc) for i in res]
+    return res
+
+
+def draw_symmetric_1_8(point, center, canvas, color):
+    points = get_symmetric_1_8(point, center)
+    for p in points:
+        canvas.setPixelColor(*p.get_xy(), color)
+
+
+def get_symmetric_1_4(point, center):
+    xc, yc = center.get_xy()
+    res = [point]
+    res += [Point(-i.x + 2 * xc, i.y) for i in res]
+    res += [Point(i.x, -i.y + 2 * yc) for i in res]
+    return res
+
+
+def draw_symmetric_1_4(point, center, canvas, color):
+    points = get_symmetric_1_4(point, center)
+    for p in points:
+        canvas.setPixelColor(*p.get_xy(), color)
+
+
 class Point:
     def __init__(self, x, y):
         self.x = x
         self.y = y
+
+    def get_xy(self):
+        return self.x, self.y
 
     def __str__(self):
         return f'({self.x}, {self.y})'

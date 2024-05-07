@@ -1,5 +1,4 @@
 from PyQt5.QtGui import QImage, QPainter, QPixmap, QPen, QColor, QFont, qRgba
-from PyQt5.QtCore import QPoint
 from PyQt5.QtWidgets import QSizePolicy
 
 from algos import lib
@@ -30,32 +29,11 @@ class Canvas:
         self.redraw_all_figures()
 
     def draw_figure(self, fig):
-        # print(f'draw_figure - {fig}:')
-        if fig.algorithm == lib:
-            qp = QPainter(self.img)
-            qp.setPen(QPen(fig.color, 1))
-            if fig.__class__ == FigureCircle:
-                qp.drawEllipse(QPoint(fig.center.x, fig.center.y), fig.r, fig.r)
-            elif fig.__class__ == FigureEllipse:
-                qp.drawEllipse(QPoint(fig.center.x, fig.center.y), fig.ra, fig.rb)
-            elif fig.__class__ == FigureCircleSpec:
-                # print(f'need_lines = {fig.need_lines}')
-                for circle in fig.need_circles:
-                    qp.drawEllipse(QPoint(circle.center.x, circle.center.y), circle.r, circle.r)
-            else:
-                for ellipse in fig.need_ellipse:
-                    qp.drawEllipse(QPoint(ellipse.center.x, ellipse.center.y), ellipse.ra, ellipse.rb)
-        else:
-            for p in fig.points:
-                color = fig.color
-                self.img.setPixelColor(p.x, p.y, color)
-            # if fig.__class__ == FigureSpec:
-            #     print(f'need_lines = {fig.need_lines}')
+        fig.draw(self.img)
 
     def redraw_all_figures(self):
         for fig in self.figures:
             self.draw_figure(fig)
-        # print(self.figures)
 
     def add_figure(self, fig):
         self.figures.append(fig)

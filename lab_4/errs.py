@@ -15,3 +15,33 @@ class Errors_my:
 
     def __str__(self):
         return f'Error("{self.text}")'
+
+
+class BaseErr(Exception):
+    @staticmethod
+    def text():
+        return 'Ошибка\n'
+
+
+class ErrParamCount(BaseErr):
+    @staticmethod
+    def text():
+        return 'Неверное количество параметров класса\n'
+
+
+class ErrParam(BaseErr):
+    @staticmethod
+    def text():
+        return 'По заданным параметра нельзя построит спектр\n'
+
+
+class ErrBegEndRadius(BaseErr):
+    @staticmethod
+    def text():
+        return 'Начальный радиус не может быть больше конечного или равен ему\n'
+
+
+class ErrStep(BaseErr):
+    @staticmethod
+    def text():
+        return 'Слишком большой шаг изменения радиуса\n'

@@ -160,7 +160,7 @@
                   <string>Параметрическое уравнение</string>
                  </property>
                  <property name="checked">
-                  <bool>true</bool>
+                  <bool>false</bool>
                  </property>
                  <attribute name="buttonGroup">
                   <string notr="true">algos_btn_gp</string>
@@ -198,6 +198,9 @@
                  </property>
                  <property name="text">
                   <string>Алгоритм Брезенхема</string>
+                 </property>
+                 <property name="checked">
+                  <bool>true</bool>
                  </property>
                  <attribute name="buttonGroup">
                   <string notr="true">algos_btn_gp</string>
@@ -1459,18 +1462,6 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_18">
-                 <property name="font">
-                  <font>
-                   <pointsize>14</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string>Шаг Rx: </string>
-                 </property>
-                </widget>
-               </item>
-               <item>
                 <widget class="QLabel" name="label_20">
                  <property name="font">
                   <font>
@@ -1501,24 +1492,6 @@
                  </property>
                  <property name="value">
                   <double>100.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QDoubleSpinBox" name="step_rx_ellipse_dsp">
-                 <property name="font">
-                  <font>
-                   <pointsize>14</pointsize>
-                  </font>
-                 </property>
-                 <property name="minimum">
-                  <double>1.000000000000000</double>
-                 </property>
-                 <property name="maximum">
-                  <double>10000.000000000000000</double>
-                 </property>
-                 <property name="value">
-                  <double>2.000000000000000</double>
                  </property>
                 </widget>
                </item>
@@ -1557,26 +1530,14 @@
                 </widget>
                </item>
                <item>
-                <widget class="QLabel" name="label_22">
+                <widget class="QLabel" name="label_18">
                  <property name="font">
                   <font>
                    <pointsize>14</pointsize>
                   </font>
                  </property>
                  <property name="text">
-                  <string>Шаг Ry: </string>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_23">
-                 <property name="font">
-                  <font>
-                   <pointsize>14</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string/>
+                  <string>Шаг Rx: </string>
                  </property>
                 </widget>
                </item>
@@ -1603,7 +1564,7 @@
                 </widget>
                </item>
                <item>
-                <widget class="QDoubleSpinBox" name="step_ry_ellipse_dsp">
+                <widget class="QDoubleSpinBox" name="step_rx_ellipse_dsp">
                  <property name="font">
                   <font>
                    <pointsize>14</pointsize>
@@ -1617,18 +1578,6 @@
                  </property>
                  <property name="value">
                   <double>5.000000000000000</double>
-                 </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QLabel" name="label_24">
-                 <property name="font">
-                  <font>
-                   <pointsize>14</pointsize>
-                  </font>
-                 </property>
-                 <property name="text">
-                  <string/>
                  </property>
                 </widget>
                </item>
@@ -1793,8 +1742,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="param_spectr_circle_gp"/>
-  <buttongroup name="algos_btn_gp"/>
   <buttongroup name="background_color_btn_gp"/>
+  <buttongroup name="algos_btn_gp"/>
+  <buttongroup name="param_spectr_circle_gp"/>
  </buttongroups>
 </ui>

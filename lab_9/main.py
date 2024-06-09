@@ -1,14 +1,12 @@
 import sys
 from PyQt5 import uic
-from PyQt5.QtWidgets import (QApplication, QMainWindow, QLabel)
-from PyQt5.QtGui import QPixmap
+from PyQt5.QtWidgets import (QApplication, QMainWindow)
 from PyQt5.QtCore import Qt
 from info import InfoWidget
 from canvas import Canvas
-from structs import *
-from random import randint
-from algos import cut_lines_cyrus_beck, get_parallel_line, is_polygon_convexity
-from errs import Errors_my, BaseErr
+from Clipper import *
+from algos import cut, is_polygon_convexity
+from errs import Errors_my
 
 DEBUG = True
 
@@ -34,7 +32,7 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         self.clipper_color = COLORS['black']
         self.line_color = COLORS['red']
         self.res_color = COLORS['green']
-        self.canvas = Canvas(self.canvas_lbl, self.clipper_color, self.background_color)
+        self.canvas = Canvas(self.canvas_lbl, self.line_color, self.clipper_color, self.background_color)
 
         self.change_clipper_color(self.clipper_color)
         self.change_line_color(self.line_color)
@@ -44,8 +42,9 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         self.clear_canvas_btn.clicked.connect(self.clear_canvas)
         self.add_point_clipper_btn.clicked.connect(self.add_point_clipper_by_btn)
         self.close_clipper_btn.clicked.connect(self.close_clipper)
-        self.draw_line_btn.clicked.connect(self.draw_line_by_btn)
-        self.draw_parallel_lines_btn.clicked.connect(self.draw_parallel_lines)
+        self.add_point_figure_btn.clicked.connect(self.add_point_figure_by_btn)
+        self.close_figure_btn.clicked.connect(self.close_figure)
+
         self.cut_btn.clicked.connect(self.cut_lines)
 
         # меню
@@ -72,27 +71,36 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
             p = Point(event.x(), event.y())
             if self.is_in_label(p):
                 event.accept()
-                if len(self.points_for_line) == 0:
-                    self.points_for_line.append(p)
+                if event.modifiers() == Qt.ShiftModifier:
+                    self.add_point_clipper(*p.get_xy())
                 else:
-                    self.points_for_line.append(p)
-                    self.add_draw_line(*self.points_for_line)
-                    self.points_for_line = []
+                    self.add_point_figure(*p.get_xy())
+
         elif event.button() == Qt.RightButton:
-            p = Point(event.x(), event.y())
-            if self.is_in_label(p):
-                event.accept()
-                self.add_point_clipper(*p.get_xy())
-        elif event.buttons() == Qt.MiddleButton:
-            self.close_clipper()
+            if event.modifiers() == Qt.ShiftModifier:
+                self.close_clipper()
+            else:
+                self.close_figure()
 
     def cut_lines(self):
+        # figure = [Point(100, 100), Point(500, 500), Point(600, 200)]
+        # clipper = [Point(500, 300), Point(800, 400), Point(700, 600)]
+        # for t in figure:
+        #     self.canvas.figure.add_point(t)
+        # for t in clipper:
+        #     self.canvas.clipper.add_point(t)
+        # self.canvas.figure.close()
+        # self.canvas.clipper.close()
+        # self.canvas.figure.draw(self.canvas.qp)
+        # self.canvas.clipper.draw(self.canvas.qp)
+
         if self.canvas.clipper.is_closed():
             if not is_polygon_convexity(self.canvas.clipper):
                 errm = Errors_my(ConvexityErr.text())
                 errm.show()
                 return
-            cut_lines_cyrus_beck(self.canvas.qp, self.canvas.lines, self.res_color, self.canvas.clipper)
+
+            cut(self.canvas.qp, self.canvas.figure, self.canvas.clipper, self.res_color, )
             self.canvas.import_img()
         else:
             errm = Errors_my(CloseClipperErr.text())
@@ -129,16 +137,35 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
                 errm.show()
                 return
 
-    def draw_line_by_btn(self):
-        x1 = self.line_x1_sp.value()
-        y1 = self.line_y1_sp.value()
-        x2 = self.line_x2_sp.value()
-        y2 = self.line_y2_sp.value()
-        self.add_draw_line(Point(x1, y1), Point(x2, y2))
+    def add_point_figure_by_btn(self):
+        x = self.figure_x_sp.value()
+        y = self.figure_y_sp.value()
+        self.add_point_figure(x, y)
 
-    def add_draw_line(self, p1: Point, p2: Point):
-        self.canvas.add_draw_line(p1, p2, self.line_color)
+    def add_point_figure(self, x, y):
+        if self.canvas.figure.is_closed():
+            self.canvas.figure = Figure(self.line_color)
+            self.canvas.redraw()
+
+        p = Point(x, y)
+        if self.canvas.figure.is_point_in_figure(p):
+            errm = Errors_my(ErrPointExistInFigure.text())
+            errm.show()
+            return
+        self.canvas.figure.add_point(p)
+        self.canvas.draw_figure()
         self.show_data_scene()
+
+    def close_figure(self):
+        if not self.canvas.figure.is_closed():
+            if self.canvas.figure.can_close():
+                self.canvas.figure.close()
+                self.canvas.draw_figure()
+                self.show_data_scene()
+            else:
+                errm = Errors_my(ErrCanNotCloseFigure.text())
+                errm.show()
+                return
 
     def show_data_scene(self):
         text = ''
@@ -150,40 +177,10 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
             text += 'не замкнут\n'
         text += self.canvas.clipper.get_data_text()
 
-        text += '----- Отрезки -----\n'
-        text += self.canvas.lines.get_data_text()
+        text += '----- Отсекаемый многоугольник -----\n'
+        text += self.canvas.figure.get_data_text()
 
         self.data_scene_textEdit.setPlainText(text)
-
-    def draw_parallel_lines(self):
-        if self.canvas.clipper.is_closed():
-            dy = 300
-            points = self.canvas.clipper.points
-
-            for i in range(-1, len(points) - 1):
-                print(i, points)
-                clipper_line = Line(points[i], points[i + 1], self.line_color)
-
-                dy = max((clipper_line.p1.y - clipper_line.p2.y) // 2, 30)
-                for mul in [1, -1]:
-                    line = get_parallel_line(clipper_line, mul * dy)
-                    print(line)
-                    self.add_draw_line(line.p1, line.p2)
-        else:
-            points = self.canvas.clipper.points
-
-            for i in range(0, len(points) - 1):
-                print(i, points)
-                clipper_line = Line(points[i], points[i + 1], self.line_color)
-
-                dy = max((clipper_line.p1.y - clipper_line.p2.y) // 2, 30)
-                for mul in [1, -1]:
-                    line = get_parallel_line(clipper_line, mul * dy)
-                    print(line)
-                    self.add_draw_line(line.p1, line.p2)
-
-
-
 
     def color_btns_clicked(self):
         self.purple_btn_line.clicked.connect(self.change_line_color_to_purple)

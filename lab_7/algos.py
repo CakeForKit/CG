@@ -60,6 +60,7 @@ def find_r(p1: Point, p2: Point, q: Point, clipper: Clipper, flag: list):
         x = round((top - q.y) / m + q.x)
         if left <= x <= right:
             return Point(x, top)
+    # проверка пересечения с нижним краем
     if q.y <= bottom:
         x = round((bottom - q.y) / m + q.x)
         if left <= x <= right:
@@ -79,7 +80,7 @@ def cut_line(line: Line, clipper: Clipper):
     s1 = sum(t1)
     s2 = sum(t2)
 
-    print(line, t1, t2)
+    # print(line, t1, t2)
 
     # проверка полной видимости отрезка
     if s1 == 0 and s2 == 0:

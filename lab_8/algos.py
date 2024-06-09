@@ -9,6 +9,12 @@ def round(x):
 def get_parallel_line(line: Line, dy):
     x1, y1 = line.p1.get_xy()
     x2, y2 = line.p2.get_xy()
+
+    if x2 == x1:
+        p1 = Point(x1 + dy, y1)
+        p2 = Point(x1 + dy, y2)
+        return Line(p1, p2, line.color)
+
     k = (y2 - y1) / (x2 - x1)
 
     def find_parallel(x1, y1, k, x2):
@@ -31,6 +37,7 @@ def get_vect_mul(fvector, svector):
     return fvector[0] * svector[1] - fvector[1] * svector[0]
 
 
+# проверка на выпуклость через векторное произведение
 def is_polygon_convexity(clipper: Clipper):
     vect1 = get_vect(clipper[0], clipper[1])
     vect2 = get_vect(clipper[1], clipper[2])

@@ -8,7 +8,7 @@ from canvas import Canvas
 from funcs import funcs_module
 from algos import FloatHorizon
 
-from errs import Errors_my
+from errs import *
 
 DEBUG = True
 
@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
 
         self.background_color = QColor(255, 255, 255)
         self.line_color = COLORS['red']
-        self.canvas = Canvas(self.canvas_lbl, self.background_color)
+        self.canvas = Canvas(self.canvas_lbl, self.line_color, self.background_color)
         self.change_line_color(self.line_color)
 
         for f_txt in funcs_module.keys():
@@ -56,9 +56,16 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         ##
 
     def draw_func(self):
+        self.show_grads()
+
         print('Start draw...')
         x_min_max_step = self.get_x_borders_step()
         z_min_max_step = self.get_z_borders_step()
+        if (x_min_max_step[0] >= x_min_max_step[1] or z_min_max_step[0] >= z_min_max_step[1]):
+            errm = Errors_my(MaxBiggerMinErr.text())
+            errm.show()
+            return
+
         func_txt = self.get_func_txt()
 
         self.canvas.redraw()
@@ -66,12 +73,19 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         FloatHorizon(*x_min_max_step, *z_min_max_step, self.canvas, funcs_module[func_txt], self.angles_xyz)
         self.canvas.import_img()
         print('end.')
+    
+    def show_grads(self):
+        print('SHOW_GRADS')
+        self.show_grads_OX_le.setText(f'{self.angles_xyz[0]:.2f}')
+        self.show_grads_OY_le.setText(f'{self.angles_xyz[1]:.2f}')
+        self.show_grads_OZ_le.setText(f'{self.angles_xyz[2]:.2f}')
 
     def reset_angles(self):
         self.angles_xyz = [0.0, 0.0, 0.0]
+        self.show_grads()
 
     def reset_angles_and_draw(self):
-        self.angles_xyz = [0.0, 0.0, 0.0]
+        self.reset_angles()
         self.draw_func()
 
     def get_func_txt(self):
@@ -93,14 +107,17 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
 
     def change_angle_x(self):
         self.angles_xyz[0] += self.ox_angle_dsp.value()
+        self.show_grads()
         self.draw_func()
 
     def change_angle_y(self):
         self.angles_xyz[1] += self.oy_angle_dsp.value()
+        self.show_grads()
         self.draw_func()
 
     def change_angle_z(self):
         self.angles_xyz[2] += self.oz_angle_dsp.value()
+        self.show_grads()
         self.draw_func()
 
     def color_btns_clicked(self):
@@ -115,6 +132,7 @@ class MainWindow(QMainWindow):  # , Ui_MainWindow):
         print(f'change_line_color to {color.getRgb()}')
         self.color_line_show.setStyleSheet(f"background-color: {color.name()}")
         self.line_color = color
+        self.canvas.setNewColor(color)
 
     def change_line_color_to_purple(self):
         self.change_line_color(COLORS['purple'])

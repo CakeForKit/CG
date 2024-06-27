@@ -9,14 +9,16 @@ def round(x):
 
 
 class Canvas:
-    def __init__(self, label, background_color):  # colour, line_colour,
+    def __init__(self, label, line_color, background_color):  # colour, line_colour,
         self.label = label
         self.width = label.size().width()
         self.height = label.size().height()
+        self.line_color = line_color
         self.background_color = background_color
         self.img = QImage(self.width, self.height, QImage.Format_ARGB32)
         self.qp = QPainter(self.img)
 
+        self.setNewColor(self.line_color)
         self.clear_canvas()
 
     def redraw(self):
@@ -32,19 +34,24 @@ class Canvas:
         self.qp.end()
         self.img = QImage(self.width, self.height, QImage.Format_RGB32)
         self.qp = QPainter(self.img)
+        self.qp.setPen(self.line_color)
+
+    def setNewColor(self, color):
+        self.line_color = color
+        self.qp.setPen(color)
 
     def import_img(self):
         pmp = QPixmap.fromImage(self.img)
         self.label.setPixmap(pmp)
         QApplication.processEvents()
 
-    def draw_line(self, x1, y1, x2, y2, color=False):
+    def draw_line(self, x1, y1, x2, y2, color=None):
         # print(f'draw_line = {[x1, y1, x2, y2]}')
-        if color:
-            save = self.qp.pen
-            self.qp.setPen(QColor('red'))
+        if color is not None:
+            # print(color)
+            self.qp.setPen(color)
             self.qp.drawLine(round(x1), round(y1), round(x2), round(y2))
-            self.qp.setPen(save)
+            self.qp.setPen(self.line_color)
         else:
             self.qp.drawLine(round(x1), round(y1), round(x2), round(y2))
 

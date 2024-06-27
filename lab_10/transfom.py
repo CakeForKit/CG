@@ -1,10 +1,13 @@
 from math import pi, sin, cos
 import numpy as np
 
-def scale(x, y, scale_param):
-    x *= scale_param
-    y *= scale_param
-    return round(x), round(y)
+FRAME_X = 100
+FRAME_Y = 100
+
+# def scale(x, y, scale_param):
+#     x *= scale_param
+#     y *= scale_param
+#     return round(x), round(y)
 
 
 def convers(arg):
@@ -32,8 +35,8 @@ def rotateZ(x, y, z, angle):
 
 
 def get_scale_param_and_mid(x_min, x_max, x_step, func, z_min, z_max, z_step, angles, width, height):
-    width -= 100
-    height -= 100
+    width -= FRAME_X
+    height -= FRAME_Y
     res_x_min = float('inf')
     res_x_max = -float('inf')
     res_y_min = float('inf')
@@ -53,11 +56,19 @@ def get_scale_param_and_mid(x_min, x_max, x_step, func, z_min, z_max, z_step, an
     print('res: ', res_x_min, res_x_max, res_y_min, res_y_max)
 
     scale_param = min(width / (res_x_max - res_x_min), height / (res_y_max - res_y_min))
-    x_mid = (res_x_max - res_x_min) / 2
-    y_mid = (res_y_max - res_y_min) / 2
+    x_mid = res_x_min * scale_param
+    y_mid = res_y_min * scale_param
+    x_mid -= FRAME_X // 2 + (width - (res_x_max - res_x_min) * scale_param) // 2
+    y_mid -= FRAME_Y // 2 + (height - (res_y_max - res_y_min) * scale_param) // 2
 
-    # print('border x:', res_x_min, res_x_max)
-    # print('border y:', res_y_min, res_y_max)
+
+    # x_mid = min(0, res_x_min)
+    # y_mid = min(0, res_y_min)
+
+    print('border x:', res_x_min, res_x_max)
+    print('border y:', res_y_min, res_y_max)
+    print('scale_param: ', scale_param)
+    print('(x_mid, y_mid)', (x_mid, y_mid))
     # print('border z:', res_z_min, res_z_max)
     return scale_param, (x_mid, y_mid)
 
@@ -66,9 +77,12 @@ def transform(x, y, z, angles, scale_param, mid, width, height):
     x, y = rotateX(x, y, z, angles[0])
     x, y = rotateY(x, y, z, angles[1])
     x, y = rotateZ(x, y, z, angles[2])
-    tx, ty = scale(x, y, scale_param)
-    tx += width // 2
-    ty += height // 2
+    tx = x * scale_param - mid[0]
+    ty = y * scale_param - mid[1]
+    # tx += (width - FRAME_X) // 2
+    # ty += (height - FRAME_Y) // 2
+    # tx -= mid[0] * scale_param
+    # ty -= mid[1] * scale_param
     # print(f'transform: {(x, y)} --> {(tx, ty)}')
-    return tx, ty
+    return round(tx), round(ty)
 

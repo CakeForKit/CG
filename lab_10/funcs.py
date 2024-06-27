@@ -28,11 +28,10 @@ def f6(x, z):
 
 
 funcs_module = {
-    'sin(x) * cos(z / 2) + cos(x) * sin(z / 2)': f1,
-    'sin(x * z)': f4,
     '(1 / 5) * sin(x) * cos(z) - (3 / 2) * cos(7 * a / 4) * exp(-a)': f6,
+    'exp(cos(x) * sin(z))': f3,
+    'sin(x * z)': f4,
     'x * z': f5,
-    'cos(x) * sin(z)': f2,
-
-    'exp(cos(x) * sin(z))': f3
+    'sin(x) * cos(z / 2) + cos(x) * sin(z / 2)': f1,
+    'cos(x) * sin(z)': f2
 }

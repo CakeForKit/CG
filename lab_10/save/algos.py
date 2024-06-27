@@ -1,12 +1,7 @@
 import numpy as np
 from canvas import Canvas
 from transfom import transform, get_scale_param_and_mid
-
-
-def draw_line(canvas, x1, y1, x2, y2, z, angles, scale_param, mid):
-    x1, y1 = transform(x1, y1, z, angles, scale_param, mid, canvas.width, canvas.height)
-    x2, y2 = transform(x2, y2, z, angles, scale_param, mid, canvas.width, canvas.height)
-    canvas.draw_line(x1, y1, x2, y2)
+from PyQt5.QtGui import QColor
 
 # Подпрограмма вычисляет пересечение с горизонтом.
 # Вычисляет пересечение 2х отрезков прямых
@@ -32,6 +27,7 @@ def Intersection(x1, y1, x2, y2, arr):
 # -1 - ниже нижнего.
 def Visible(x, y, top, bottom):
     # Если точка, ниже нижнего горизонта (или на нем). То она видима.
+    # print(len(top), '-------------------', x)
     if y <= bottom[x]:
         return -1
     # Если точка выше верхнего горизонта (или на нем). То она видима.
@@ -61,7 +57,7 @@ def Horizon(x1, y1, x2, y2, top, bottom):
 def Side(x, y, x_edge, y_edge, canvas: Canvas, top, bottom):
     if (x_edge != -1):
         # Если кривая не первая
-        # canvas.draw_line(x_edge, y_edge, x, y)    # если надо отрисоватьбоковое ребро
+        canvas.draw_line(x_edge, y_edge, x, y)
         Horizon(x_edge, y_edge, x, y, top, bottom)
     x_edge = x
     y_edge = y
@@ -85,16 +81,15 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
         x_prev = x_min
         y_prev = func(x_min, z)
         # использование видового преобразования
-        # x_prev, y_prev = transform(x_prev, y_prev, z, angles, scale_param, mid, canvas.width, canvas.height)
+        x_prev, y_prev = transform(x_prev, y_prev, z, angles, scale_param, mid, canvas.width, canvas.height)
 
         flag_prev = Visible(x_prev, y_prev, top, bottom)
         #
         x_left, y_left = Side(x_prev, y_prev, x_left, y_left, canvas, top, bottom)
         for x in np.arange(x_min, x_max, x_step):
             y_curr = func(x, z)
-            x_curr = x
-            # x_curr, y_curr = transform(x, y_curr, z, angles, scale_param, mid, canvas.width, canvas.height)
-
+            x_curr, y_curr = transform(x, y_curr, z, angles, scale_param, mid, canvas.width, canvas.height)
+            # print('transform ', x, x_curr)
             # Проверка видимости текущей точки.
             flag_curr = Visible(x_curr, y_curr, top, bottom)
             # Равенство флагов означает, что обе точки находятся
@@ -104,10 +99,10 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
                 # Если текущая вершина выше верхнего горизонта или ниже нижнего (Предыдущая такая же)
                 if flag_curr != 0:
                     # Значит отображаем отрезок от предыдущей до текущей.
-                    draw_line(canvas, x_prev, y_prev, x_curr, y_curr, z, angles, scale_param, mid)
-                    # canvas.draw_line(x_prev, y_prev, x_curr, y_curr)
+                    canvas.draw_line(x_prev, y_prev, x_curr, y_curr)
                     # заполненяем массив плавающих горизонтов между x_prev и x_curr
                     Horizon(x_prev, y_prev, x_curr, y_curr, top, bottom)
+                    # canvas.draw_line(x_prev, top[x_prev], x_curr, top[x_curr], True)  ####################
                 # flag_curr == 0 означает, что и flag_prev == 0,
                 # А значит часть от flag_curr до flag_prev невидима. Ничего не делаем.
             else:
@@ -120,8 +115,7 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
                         # Сегмент "входит" в нижний горизонт. Ищем пересечение с нижним горизонтом.
                         xi, yi = Intersection(x_prev, y_prev, x_curr, y_curr, bottom)
                     # Отображаем сегмент, от предыдущей точки, до пересечения.
-                    draw_line(canvas, x_prev, y_prev, xi, yi, z, angles, scale_param, mid)
-                    # canvas.draw_line(x_prev, y_prev, xi, yi)
+                    canvas.draw_line(x_prev, y_prev, xi, yi)
                     Horizon(x_prev, y_prev, xi, yi, top, bottom)
                 else:
                     if flag_curr == 1:
@@ -129,8 +123,7 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
                             # Сегмент "выходит" из верхнего горизонта. Ищем пересечение с верхним горизонтом.
                             xi, yi = Intersection(x_prev, y_prev, x_curr, y_curr, top)
                             # Отображаем сегмент от пересечения до текущей точки.
-                            draw_line(canvas, xi, yi, x_curr, y_curr, z, angles, scale_param, mid)
-                            # canvas.draw_line(xi, yi, x_curr, y_curr)
+                            canvas.draw_line(xi, yi, x_curr, y_curr)
                             Horizon(xi, yi, x_curr, y_curr, top, bottom)
                         else:  # flag_prev == -1
                             # Сегмент начинается с точки, ниже нижнего горизонта
@@ -139,22 +132,19 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
                             # Первое пересечение с нижним горизонтом.
                             xi, yi = Intersection(x_prev, y_prev, x_curr, y_curr, bottom)
                             # Отображаем сегмент от предыдущей то пересечения.
-                            draw_line(canvas, x_prev, y_prev, xi, yi, z, angles, scale_param, mid)
-                            # canvas.draw_line(x_prev, y_prev, xi, yi)
+                            canvas.draw_line(x_prev, y_prev, xi, yi)
                             Horizon(x_prev, y_prev, xi, yi, top, bottom)
                             # Второе пересечение с верхним горизонтом.
                             xi, yi = Intersection(x_prev, y_prev, x_curr, y_curr, top)
                             # Отображаем сегмент от пересечения до текущей.
-                            draw_line(canvas, xi, yi, x_curr, y_curr, z, angles, scale_param, mid)
-                            # canvas.draw_line(xi, yi, x_curr, y_curr)
+                            canvas.draw_line(xi, yi, x_curr, y_curr)
                             Horizon(xi, yi, x_curr, y_curr, top, bottom)
                     else:  # flag_curr == -1
                         if flag_prev == 0:
                             # Сегмент "выходит" из нижнего горизонта.
                             # Ищем пересечение с нижним горизонтом.
                             xi, yi = Intersection(x_prev, y_prev, x_curr, y_curr, bottom)
-                            draw_line(canvas, xi, yi, x_curr, y_curr, z, angles, scale_param, mid)
-                            # canvas.draw_line(xi, yi, x_curr, y_curr)
+                            canvas.draw_line(xi, yi, x_curr, y_curr)
                             Horizon(xi, yi, x_curr, y_curr, top, bottom)
                         else:
                             # Сегмент начинается с точки, выше верхнего горизонта
@@ -163,17 +153,22 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
                             # Первое пересечение с верхним горизонтом.
                             xi, yi = Intersection(x_prev, y_prev, x_curr, y_curr, top)
                             # Отображаем сегмент от предыдущей до пересечения.
-                            draw_line(canvas, x_prev, y_prev, xi, yi, z, angles, scale_param, mid)
-                            # canvas.draw_line(x_prev, y_prev, xi, yi)
+                            canvas.draw_line(x_prev, y_prev, xi, yi)
                             Horizon(x_prev, y_prev, xi, yi, top, bottom)
                             # Ищем второе пересечение с нижним горизонтом.
                             xi, yi = Intersection(x_prev, y_prev, x_curr, y_curr, bottom)
                             # Отображаем сегмент от пересечения до текущей.
-                            draw_line(canvas, xi, yi, x_curr, y_curr, z, angles, scale_param, mid)
-                            # canvas.draw_line(xi, yi, x_curr, y_curr)
+                            canvas.draw_line(xi, yi, x_curr, y_curr)
                             Horizon(xi, yi, x_curr, y_curr, top, bottom)
             x_prev, y_prev = x_curr, y_curr
             flag_prev = flag_curr
+
+        # if z == z_max or True:
+        #     for x in np.arange(x_min, x_max - x_step, x_step):
+        #         y_curr = func(x, z)
+        #         x_curr, y_curr = transform(x, y_curr, z, angles, scale_param, mid, canvas.width, canvas.height)
+        #         canvas.draw_line(x_curr, top[x_curr], x_curr + 1, top[x_curr], QColor('blue'))
+        #         canvas.draw_line(x_curr, bottom[x_curr], x_curr + 1, bottom[x_curr], QColor('red'))
 
         x_right, y_right = Side(x_prev, y_prev, x_right, y_right, canvas, top, bottom)
 

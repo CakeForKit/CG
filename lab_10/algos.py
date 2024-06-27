@@ -1,7 +1,7 @@
 import numpy as np
 from canvas import Canvas
 from transfom import transform, get_scale_param_and_mid
-
+from PyQt5.QtGui import QColor
 
 # Подпрограмма вычисляет пересечение с горизонтом.
 # Вычисляет пересечение 2х отрезков прямых
@@ -27,6 +27,7 @@ def Intersection(x1, y1, x2, y2, arr):
 # -1 - ниже нижнего.
 def Visible(x, y, top, bottom):
     # Если точка, ниже нижнего горизонта (или на нем). То она видима.
+    # print(len(top), '-------------------', x)
     if y <= bottom[x]:
         return -1
     # Если точка выше верхнего горизонта (или на нем). То она видима.
@@ -88,6 +89,7 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
         for x in np.arange(x_min, x_max, x_step):
             y_curr = func(x, z)
             x_curr, y_curr = transform(x, y_curr, z, angles, scale_param, mid, canvas.width, canvas.height)
+            # print('transform ', x, x_curr)
             # Проверка видимости текущей точки.
             flag_curr = Visible(x_curr, y_curr, top, bottom)
             # Равенство флагов означает, что обе точки находятся
@@ -160,6 +162,13 @@ def FloatHorizon(x_min, x_max, x_step, z_min, z_max, z_step, canvas: Canvas, fun
                             Horizon(xi, yi, x_curr, y_curr, top, bottom)
             x_prev, y_prev = x_curr, y_curr
             flag_prev = flag_curr
+
+        # if z == z_max or True:
+        #     for x in np.arange(x_min, x_max - x_step, x_step):
+        #         y_curr = func(x, z)
+        #         x_curr, y_curr = transform(x, y_curr, z, angles, scale_param, mid, canvas.width, canvas.height)
+        #         canvas.draw_line(x_curr, top[x_curr], x_curr + 1, top[x_curr], QColor('blue'))
+        #         canvas.draw_line(x_curr, bottom[x_curr], x_curr + 1, bottom[x_curr], QColor('red'))
 
         x_right, y_right = Side(x_prev, y_prev, x_right, y_right, canvas, top, bottom)
 

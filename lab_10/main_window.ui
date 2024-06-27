@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1068</width>
-    <height>686</height>
+    <height>747</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -34,7 +34,7 @@
       </property>
       <property name="font">
        <font>
-        <pointsize>15</pointsize>
+        <pointsize>14</pointsize>
        </font>
       </property>
       <property name="text">
@@ -58,13 +58,13 @@
       </property>
       <property name="maximumSize">
        <size>
-        <width>1000</width>
+        <width>1100</width>
         <height>16777215</height>
        </size>
       </property>
       <property name="font">
        <font>
-        <pointsize>15</pointsize>
+        <pointsize>14</pointsize>
        </font>
       </property>
       <property name="styleSheet">
@@ -90,7 +90,7 @@
          </property>
          <property name="font">
           <font>
-           <pointsize>15</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_11">
@@ -119,7 +119,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -143,7 +143,7 @@
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -166,7 +166,7 @@ selection-color: rgb(0, 0, 0);</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>15</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -195,7 +195,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -224,7 +224,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -242,7 +242,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -260,7 +260,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -278,7 +278,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -296,7 +296,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -314,7 +314,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
@@ -332,7 +332,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="minimum">
@@ -342,7 +342,7 @@ selection-color: rgb(0, 0, 0);</string>
                <double>1000.000000000000000</double>
               </property>
               <property name="value">
-               <double>-5.000000000000000</double>
+               <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -356,7 +356,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="minimum">
@@ -380,14 +380,14 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="decimals">
                <number>4</number>
               </property>
               <property name="minimum">
-               <double>-1000.000000000000000</double>
+               <double>0.000100000000000</double>
               </property>
               <property name="maximum">
                <double>1000.000000000000000</double>
@@ -407,7 +407,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="minimum">
@@ -417,7 +417,7 @@ selection-color: rgb(0, 0, 0);</string>
                <double>1000.000000000000000</double>
               </property>
               <property name="value">
-               <double>-5.000000000000000</double>
+               <double>0.000000000000000</double>
               </property>
              </widget>
             </item>
@@ -431,7 +431,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="minimum">
@@ -455,20 +455,20 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="decimals">
                <number>4</number>
               </property>
               <property name="minimum">
-               <double>-1000.000000000000000</double>
+               <double>0.000100000000000</double>
               </property>
               <property name="maximum">
                <double>1000.000000000000000</double>
               </property>
               <property name="value">
-               <double>0.100000000000000</double>
+               <double>0.050000000000000</double>
               </property>
              </widget>
             </item>
@@ -487,7 +487,7 @@ selection-color: rgb(0, 0, 0);</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>15</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <property name="frameShape">
@@ -522,7 +522,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -546,7 +546,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -583,7 +583,7 @@ selection-color: rgb(0, 0, 0);</string>
                  </property>
                  <property name="font">
                   <font>
-                   <pointsize>15</pointsize>
+                   <pointsize>14</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -628,7 +628,7 @@ selection-color: rgb(0, 0, 0);</string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>15</pointsize>
+                     <pointsize>14</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -655,7 +655,7 @@ selection-color: rgb(0, 0, 0);</string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>15</pointsize>
+                     <pointsize>14</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -682,7 +682,7 @@ selection-color: rgb(0, 0, 0);</string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>15</pointsize>
+                     <pointsize>14</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -709,7 +709,7 @@ selection-color: rgb(0, 0, 0);</string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>15</pointsize>
+                     <pointsize>14</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -736,7 +736,7 @@ selection-color: rgb(0, 0, 0);</string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>15</pointsize>
+                     <pointsize>14</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -763,7 +763,7 @@ selection-color: rgb(0, 0, 0);</string>
                    </property>
                    <property name="font">
                     <font>
-                     <pointsize>15</pointsize>
+                     <pointsize>14</pointsize>
                     </font>
                    </property>
                    <property name="styleSheet">
@@ -791,7 +791,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -834,7 +834,7 @@ selection-color: rgb(0, 0, 0);</string>
                  </property>
                  <property name="font">
                   <font>
-                   <pointsize>15</pointsize>
+                   <pointsize>14</pointsize>
                   </font>
                  </property>
                  <property name="text">
@@ -865,7 +865,7 @@ selection-color: rgb(0, 0, 0);</string>
                  </property>
                  <property name="font">
                   <font>
-                   <pointsize>15</pointsize>
+                   <pointsize>14</pointsize>
                   </font>
                  </property>
                  <property name="styleSheet">
@@ -888,7 +888,7 @@ selection-color: rgb(0, 0, 0);</string>
                </property>
                <property name="font">
                 <font>
-                 <pointsize>15</pointsize>
+                 <pointsize>14</pointsize>
                 </font>
                </property>
                <property name="orientation">
@@ -918,12 +918,12 @@ selection-color: rgb(0, 0, 0);</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>15</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_4">
           <property name="spacing">
-           <number>0</number>
+           <number>3</number>
           </property>
           <property name="leftMargin">
            <number>0</number>
@@ -947,7 +947,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -966,8 +966,8 @@ selection-color: rgb(0, 0, 0);</string>
             <property name="spacing">
              <number>10</number>
             </property>
-            <item row="0" column="0">
-             <widget class="QLabel" name="label_24">
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_26">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -976,11 +976,11 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>OX: </string>
+               <string>OZ (град): </string>
               </property>
              </widget>
             </item>
@@ -994,7 +994,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="minimum">
@@ -1005,6 +1005,33 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="value">
                <double>10.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QPushButton" name="rotate_x_btn">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="minimumSize">
+               <size>
+                <width>300</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="styleSheet">
+               <string notr="true">background-color: rgb(255, 221, 211);</string>
+              </property>
+              <property name="text">
+               <string>Повернуть</string>
               </property>
              </widget>
             </item>
@@ -1018,7 +1045,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="minimum">
@@ -1028,12 +1055,12 @@ selection-color: rgb(0, 0, 0);</string>
                <double>1000.000000000000000</double>
               </property>
               <property name="value">
-               <double>10.000000000000000</double>
+               <double>-10.000000000000000</double>
               </property>
              </widget>
             </item>
-            <item row="1" column="0">
-             <widget class="QLabel" name="label_25">
+            <item row="0" column="0">
+             <widget class="QLabel" name="label_24">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
                 <horstretch>0</horstretch>
@@ -1042,53 +1069,11 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="text">
-               <string>OY: </string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_26">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>15</pointsize>
-               </font>
-              </property>
-              <property name="text">
-               <string>OZ: </string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QDoubleSpinBox" name="oz_angle_dsp">
-              <property name="sizePolicy">
-               <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-                <horstretch>0</horstretch>
-                <verstretch>0</verstretch>
-               </sizepolicy>
-              </property>
-              <property name="font">
-               <font>
-                <pointsize>15</pointsize>
-               </font>
-              </property>
-              <property name="minimum">
-               <double>-1000.000000000000000</double>
-              </property>
-              <property name="maximum">
-               <double>1000.000000000000000</double>
-              </property>
-              <property name="value">
-               <double>10.000000000000000</double>
+               <string>OX (град): </string>
               </property>
              </widget>
             </item>
@@ -1108,7 +1093,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="styleSheet">
@@ -1135,7 +1120,7 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
               <property name="styleSheet">
@@ -1146,30 +1131,160 @@ selection-color: rgb(0, 0, 0);</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QPushButton" name="rotate_x_btn">
+            <item row="2" column="1">
+             <widget class="QDoubleSpinBox" name="oz_angle_dsp">
               <property name="sizePolicy">
                <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
                 <horstretch>0</horstretch>
                 <verstretch>0</verstretch>
                </sizepolicy>
               </property>
-              <property name="minimumSize">
-               <size>
-                <width>300</width>
-                <height>0</height>
-               </size>
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="minimum">
+               <double>-1000.000000000000000</double>
+              </property>
+              <property name="maximum">
+               <double>1000.000000000000000</double>
+              </property>
+              <property name="value">
+               <double>10.000000000000000</double>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_25">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
               </property>
               <property name="font">
                <font>
-                <pointsize>15</pointsize>
+                <pointsize>14</pointsize>
                </font>
               </property>
-              <property name="styleSheet">
-               <string notr="true">background-color: rgb(255, 221, 211);</string>
+              <property name="text">
+               <string>OY (град): </string>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QLabel" name="label_31">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="font">
+             <font>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string>Текущие углы поворота (град):</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QLabel" name="label_27">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
               </property>
               <property name="text">
-               <string>Повернуть</string>
+               <string>OX:   </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="show_grads_OX_le">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_28">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>OY:   </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="show_grads_OY_le">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLabel" name="label_29">
+              <property name="sizePolicy">
+               <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                <horstretch>0</horstretch>
+                <verstretch>0</verstretch>
+               </sizepolicy>
+              </property>
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string>OZ:   </string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QLineEdit" name="show_grads_OZ_le">
+              <property name="font">
+               <font>
+                <pointsize>14</pointsize>
+               </font>
+              </property>
+              <property name="text">
+               <string/>
+              </property>
+              <property name="readOnly">
+               <bool>true</bool>
               </property>
              </widget>
             </item>
@@ -1191,7 +1306,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -1215,7 +1330,7 @@ selection-color: rgb(0, 0, 0);</string>
          </property>
          <property name="font">
           <font>
-           <pointsize>15</pointsize>
+           <pointsize>14</pointsize>
           </font>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -1250,7 +1365,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">
@@ -1277,7 +1392,7 @@ selection-color: rgb(0, 0, 0);</string>
             </property>
             <property name="font">
              <font>
-              <pointsize>15</pointsize>
+              <pointsize>14</pointsize>
              </font>
             </property>
             <property name="styleSheet">

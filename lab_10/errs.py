@@ -22,6 +22,11 @@ class BaseErr(Exception):
     def text():
         return 'Ошибка\n'
 
+class MaxBiggerMinErr(BaseErr):
+    @staticmethod
+    def text():
+        return 'Максимальное значение координат не может быть меньше или равно минимальному\n'
+
 class CloseClipperErr(BaseErr):
     @staticmethod
     def text():
